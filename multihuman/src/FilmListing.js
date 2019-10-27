@@ -1,57 +1,66 @@
-import React from 'react'
+// import React from 'react'
 import Fave from './Fave'
 
-const FilmListing = (props) => {
+import React, { Component } from 'react'
 
-    var handleFilterClick = (filter)=>{
-    
-
-    console.log('etting filter to ');
-
-   }
-
-
-    var handleDetailsClick = (film)=>{
-        console.log('booooooiii ');
-        
+export default class FilmListing extends Component {
+    state={
+        filter: 'all'
             }
-    return (
-        <div>
-         <div className="film-list">
-    <h1 className="section-title">FILMS</h1>
-    <div className="film-list-filters">
-        <div className="film-list-filter" onClick= {()=>handleFilterClick('tttt')}>
-            ALL
-            <span className="section-count">
-            </span>
-        </div>
-        <div className="film-list-filter" onClick= {()=>handleFilterClick('tttt')}>
-      FAVES
-            <span className="section-count" >0</span>
-        </div>
-    </div>
-
-    <div>
-    <div className="film-row" onClick= {()=>handleDetailsClick('tttt')} >
-    <img src={`https://image.tmdb.org/t/p/w500/${props.data.poster_path}`} />
-    
-    <div className="film-summary">
-    <h1 >{props.data.title}</h1>
-    <p>{props.data.release_date}</p>
-      <Fave/>
-   
-</div>
-    </div>
-  
-    </div>
-</div>
-  
-  </div>
-    
-  
-
+            handleFilterClick = (filter)=>{
+                this.setState({
+                    filter: filter
+                })
+            console.log('etting filter to ');
+        
+           }
+        
+            handleDetailsClick = (film)=>{
+                console.log('booooooiii ');
+                
+                    }
+                    
+    render() {
       
-    )
-}
+   
 
-export default FilmListing
+
+                return (
+                    <div>
+                     <div className="film-list">
+                <h1 className="section-title">FILMS</h1>
+                <div className="film-list-filters">
+                <div className={`film-list-filter ${this.state.filter === 'all' ? 'is-active' : 'all'}`} onClick={() => this.handleFilterClick('all')}>
+                        ALL
+                        <span className="section-count">0
+                        </span>
+                    </div>
+                    <div className={`film-list-filter ${this.state.filter === 'faves' ? 'is-active' : ''}`} onClick={() => this.handleFilterClick('faves')}>
+                  FAVES
+                        <span className="section-count" >0</span>
+                    </div>
+                </div>
+            
+                <div>
+                <div className="film-row" onClick= {()=>this.handleDetailsClick('')} >
+                <img src={`https://image.tmdb.org/t/p/w500/${this.props.data.poster_path}`} />
+                
+                <div className="film-summary">
+                <h1 >{this.props.data.title}</h1>
+                <p>{this.props.data.release_date}</p>
+                  <Fave/>
+               
+            </div>
+                </div>
+              
+                </div>
+            </div>
+              
+              </div>
+                
+              
+            
+                  
+                )
+            }
+        }
