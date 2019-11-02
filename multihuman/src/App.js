@@ -7,18 +7,62 @@ import Fave from './Fave'
 import TMDB from './TMDB'
 var data =  TMDB
 
+
+
 export default class App extends Component {
+ 
+  state={
+    films: data.films,
+    faves:[],
+    display:'all'
+  }
+isFave = (clas)=>{
+
+this.setState({
+  display:clas
+})
+
+console.log('done mate');
+
+}
+  
+   
+  
   render() {
+   let handleFaveToggle=(item)=>{
+      if(this.state.faves.indexOf(item) === -1){
+       
+    this.state.faves.push(item)
+    
+        
+  console.log('added');
+  console.log(this.state.faves);
+  
+      }else
+       if(this.state.faves.indexOf(item) !== -1){
+        var index = this.state.faves.indexOf(item)
+      this.state.faves.splice(index,1)
+  
+      
+  console.log('removed');
+  console.log(this.state.faves);
+  
+  
+      }
+  }
     return (
       <div className="film-library">
-      {/* <h1>{data.films[1].title}</h1> */}
-       <div className="film-list">
-         <h1 className="section-title">FILMS</h1> 
-      {data.films.map(item=>   <FilmListing data={item}/> )}
 
+       <div className="film-list">
+         <div className="section-title">FILMS
+      
+      {console.log(this.state.faves) }
+      {this.state.display === 'all' ? data.films.map(item=><FilmListing  isFave={this.isFave} films={this.state.films} like={this.state.faves} handleFaveToggle ={handleFaveToggle} data={item}/> ) : ''}
+      {this.state.display === 'faves' ? this.state.faves.map(item=><FilmListing  isFave={this.isFave} films={this.state.films} like={this.state.faves} handleFaveToggle ={handleFaveToggle} data={item}/> ) : ''}
+     
       </div>
   <FilmDetails data={data}/>
-  
+  </div> 
   </div>
     )
   }

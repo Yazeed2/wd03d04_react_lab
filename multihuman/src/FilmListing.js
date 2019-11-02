@@ -11,7 +11,9 @@ export default class FilmListing extends Component {
                 this.setState({
                     filter: filter
                 })
-            console.log('etting filter to ');
+
+            
+            this.props.isFave(filter) 
         
            }
         
@@ -32,12 +34,12 @@ export default class FilmListing extends Component {
                 <div className="film-list-filters">
                 <div className={`film-list-filter ${this.state.filter === 'all' ? 'is-active' : 'all'}`} onClick={() => this.handleFilterClick('all')}>
                         ALL
-                        <span className="section-count">0
+                        <span className="section-count">{this.props.films.length}
                         </span>
                     </div>
                     <div className={`film-list-filter ${this.state.filter === 'faves' ? 'is-active' : ''}`} onClick={() => this.handleFilterClick('faves')}>
                   FAVES
-                        <span className="section-count" >0</span>
+                        <span className="section-count" >{this.props.like.length}</span>
                     </div>
                 </div>
             
@@ -46,9 +48,9 @@ export default class FilmListing extends Component {
                 <img src={`https://image.tmdb.org/t/p/w500/${this.props.data.poster_path}`} />
                 
                 <div className="film-summary">
-                <h1 >{this.props.data.title}</h1>
-                <p>{this.props.data.release_date}</p>
-                  <Fave/>
+                <h1 style={{'color':"#000"}}>{this.props.data.title}</h1>
+                <p style={{'color':"#000"}}>{this.props.data.release_date}</p>
+                    <Fave handleFaveToggle={this.props.handleFaveToggle} item={this.props.data }/>
                
             </div>
                 </div>

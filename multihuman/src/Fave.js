@@ -8,6 +8,7 @@ export default class Fave extends Component {
        this.setState({
            isFave: !this.state.isFave
        })
+       this.props.handleFaveToggle(this.props.item)
     }
     state={
         isFave:false
@@ -21,7 +22,7 @@ export default class Fave extends Component {
               
                 <div  onClick= {this.handleClick} className={`film-row-fave ${userType = this.state.isFave ? "add_to_queue" : "remove_from_queue"
 }`}>
-  <p className="material-icons" >add_to_queue</p>
+  <p className="material-icons"style={{'color':"black"}} >add_to_queue</p>
 </div>
             </div>
         )
