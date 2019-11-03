@@ -61,7 +61,9 @@ console.log('done mate');
       {this.state.display === 'faves' ? this.state.faves.map(item=><FilmListing  isFave={this.isFave} films={this.state.films} like={this.state.faves} handleFaveToggle ={handleFaveToggle} data={item}/> ) : ''}
      
       </div>
-  <FilmDetails data={data}/>
+      {this.state.display === 'faves' ?<FilmDetails data={this.state.faves[0]}/> : ''}
+ 
+
   </div> 
   </div>
     )
